@@ -1,0 +1,23 @@
+databases:
+  - name: training-quiz-db
+    databaseName: quizdb
+    user: quizuser
+    plan: free
+    postgresMajorVersion: 16
+
+services:
+  - type: web
+    name: hidynamic-training-quiz
+    runtime: node
+    plan: free
+    branch: master
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: training-quiz-db
+          property: connectionString
