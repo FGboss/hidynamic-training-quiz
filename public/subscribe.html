@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目通知订阅 - 嗨动培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei',sans-serif;background:#f0f4f8;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.card{background:#fff;border-radius:16px;padding:32px 28px;max-width:420px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+h2{font-size:20px;color:#1a2340;margin-bottom:4px}
+.sub{font-size:13px;color:#7b8ba0;margin-bottom:20px}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:14px;color:#334;margin-bottom:6px;font-weight:500}
+input,select{width:100%;padding:10px 14px;border:2px solid #e4e9f0;border-radius:10px;font-size:15px;outline:none;transition:border .2s;background:#fafbfc}
+input:focus,select:focus{border-color:#3b82f6;background:#fff}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{padding:6px 14px;border:2px solid #e4e9f0;border-radius:20px;font-size:13px;cursor:pointer;user-select:none;transition:all .2s;background:#fff}
+.chip.active{border-color:#3b82f6;background:#eff6ff;color:#2563eb}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;color:#fff;background:linear-gradient(135deg,#3b82f6,#1d4ed8);transition:opacity .2s;margin-top:4px}
+.btn:hover{opacity:0.9}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.msg{margin-top:16px;padding:12px;border-radius:10px;font-size:14px;text-align:center;display:none}
+.msg.success{background:#ecfdf5;color:#065f46;display:block}
+.msg.error{background:#fef2f2;color:#991b1b;display:block}
+.info-box{margin-top:20px;padding:14px;background:#f8fafc;border-radius:10px;font-size:13px;color:#64748b;line-height:1.6}
+.info-box b{color:#334}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>📬 项目通知订阅</h2>
+  <p class="sub">绑定后自动接收培训提醒和项目通知</p>
+
+  <div class="form-group">
+    <label>你的姓名</label>
+    <input id="name" placeholder="输入姓名（如：童伟桀）" autocomplete="off">
+  </div>
+  <div class="form-group">
+    <label>邮箱地址</label>
+    <input id="email" type="email" placeholder="接收通知的邮箱" autocomplete="off">
+  </div>
+  <div class="form-group">
+    <label>订阅通知类型</label>
+    <div class="checkbox-group">
+      <span class="chip" data-type="weekly_start">📅 每周培训启动提醒</span>
+      <span class="chip" data-type="quiz_deadline">⏰ 答题截止提醒</span>
+      <span class="chip" data-type="exam_reminder">📝 周考核提醒</span>
+      <span class="chip" data-type="speech_reminder">🎤 演讲考核提醒</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>通知时间偏好</label>
+    <select id="notifyTime">
+      <option value="08:00">早上 8:00</option>
+      <option value="09:00" selected>早上 9:00</option>
+      <option value="18:00">下午 6:00</option>
+    </select>
+  </div>
+
+  <button class="btn" onclick="subscribe()">确认订阅</button>
+  <div id="msg" class="msg"></div>
+
+  <div class="info-box">
+    <b>📋 订阅说明：</b><br>
+    · 订阅后将收到QQ邮箱通知<br>
+    · 可随时取消订阅<br>
+    · 通知类型可多选<br>
+    · 如有疑问请联系李雯锋
+  </div>
+</div>
+
+<script>
+// Chip toggle
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => c.classList.toggle('active'));
+});
+
+async function subscribe() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!name || !email) {
+    showMsg('请填写姓名和邮箱', 'error');
+    return;
+  }
+  const types = [...document.querySelectorAll('.chip.active')].map(c => c.dataset.type);
+  const time = document.getElementById('notifyTime').value;
+
+  const btn = document.querySelector('.btn');
+  btn.disabled = true;
+  btn.textContent = '提交中...';
+
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ name, email, types, time })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showMsg('订阅成功！你将收到项目通知', 'success');
+    } else {
+      showMsg(data.error || '订阅失败', 'error');
+    }
+  } catch(e) {
+    showMsg('网络错误，请重试', 'error');
+  }
+  btn.disabled = false;
+  btn.textContent = '确认订阅';
+}
+
+function showMsg(text, type) {
+  const m = document.getElementById('msg');
+  m.textContent = text;
+  m.className = 'msg ' + type;
+}
+</script>
+</body>
+</html>
