@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嗨动产品新人培训答题</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --primary: #1A73E8;
+  --primary-dark: #1557B0;
+  --primary-light: #E8F0FE;
+  --success: #0F9D58;
+  --danger: #EA4335;
+  --warning: #FBBC04;
+  --bg: #F5F7FA;
+  --card: #FFFFFF;
+  --text: #202124;
+  --text-secondary: #5F6368;
+  --border: #DADCE0;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --transition: 0.25s ease;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 16px; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--primary), #0D47A1);
+  color: #fff;
+  padding: 24px 16px;
+  text-align: center;
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(26,115,232,0.3);
+}
+.header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.header p { font-size: 0.85rem; opacity: 0.9; }
+
+/* Navigation Tabs (3 main tabs) */
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.nav-tabs .tab {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  transition: var(--transition);
+  white-space: nowrap;
+  user-select: none;
+}
+.nav-tabs .tab:hover { border-color: var(--primary); background: var(--primary-light); }
+.nav-tabs .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* Product selection tabs (within quiz tab) */
+.product-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.product-tabs .ptab {
+  flex: 1;
+  min-width: 110px;
+  padding: 16px 12px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  transition: var(--transition);
+  white-space: nowrap;
+  user-select: none;
+}
+.product-tabs .ptab:hover { border-color: var(--primary); background: var(--primary-light); transform: translateY(-2px); }
+.product-tabs .ptab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.card h2 { font-size: 1.15rem; margin-bottom: 12px; color: var(--primary); }
+.card h3 { font-size: 1rem; margin-bottom: 8px; }
+
+/* Info bar */
+.info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.info-tag {
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Name input */
+.name-card { text-align: center; padding: 32px 20px; }
+.name-card h2 { font-size: 1.3rem; margin-bottom: 8px; }
+.name-card .subtitle { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px; }
+.name-card .current-user { color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+.name-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 0 auto 16px;
+  display: block;
+  transition: var(--transition);
+}
+.name-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(26,115,232,0.15); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover { background: #0B8043; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { background: #C5221F; }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: #fff; }
+.btn-outline:hover { background: var(--primary-light); }
+.btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+/* Question */
+.question-block { margin-bottom: 24px; }
+.question-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  background: var(--primary-light);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+}
+.q-type {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+  font-weight: 700;
+}
+.q-type.single { background: #E8F5E9; color: #2E7D32; }
+.q-type.multi { background: #FFF3E0; color: #E65100; }
+.q-type.judge { background: #E3F2FD; color: #1565C0; }
+.q-type.short { background: #F3E5F5; color: #7B1FA2; }
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.option:hover { border-color: var(--primary); background: var(--primary-light); }
+.option.selected { border-color: var(--primary); background: #D2E3FC; }
+.option.correct { border-color: var(--success); background: #E6F4EA; }
+.option.wrong { border-color: var(--danger); background: #FCE8E6; }
+.option input { margin-top: 3px; flex-shrink: 0; }
+.option label { cursor: pointer; font-size: 0.88rem; flex: 1; }
+
+/* Short answer */
+.short-answer-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: var(--transition);
+}
+.short-answer-input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+
+/* Score */
+.score-display { text-align: center; padding: 24px; }
+.score-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.score-pass { background: #E6F4EA; color: var(--success); border: 4px solid var(--success); }
+.score-fail { background: #FCE8E6; color: var(--danger); border: 4px solid var(--danger); }
+.score-pending { background: var(--primary-light); color: var(--primary); border: 4px solid var(--primary); }
+
+.score-breakdown {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.score-item {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+.score-item .label { font-size: 0.78rem; color: var(--text-secondary); }
+.score-item .value { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+
+/* Mentor section (in result) */
+.mentor-section {
+  background: #FFF8E1;
+  border: 1px solid #FFE082;
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 16px;
+}
+.mentor-section h3 { color: #F57F17; margin-bottom: 8px; }
+
+/* Records page */
+.record-group {
+  margin-bottom: 24px;
+}
+.record-group-header {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.record-item:hover { box-shadow: var(--shadow); }
+.record-item.best {
+  background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
+  border: 2px solid #FFD54F;
+}
+.record-info { display: flex; flex-direction: column; gap: 2px; }
+.record-name { font-weight: 700; font-size: 0.92rem; }
+.record-date { font-size: 0.78rem; color: var(--text-secondary); }
+.record-score { font-weight: 700; font-size: 1rem; text-align: right; }
+.record-score.pass { color: var(--success); }
+.record-score.fail { color: var(--danger); }
+.record-score.pending { color: var(--warning); }
+.record-status { font-size: 0.75rem; }
+
+/* Mentor panel */
+.mentor-login { text-align: center; padding: 40px 20px; }
+.mentor-login h2 { margin-bottom: 8px; }
+.mentor-login p { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px; }
+.password-input {
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 0 auto 16px;
+  display: block;
+  transition: var(--transition);
+}
+.password-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(26,115,232,0.15); }
+
+.mentor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.mentor-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.mentor-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  min-width: 600px;
+}
+.mentor-table th, .mentor-table td {
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mentor-table th {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.mentor-table tr:hover { background: #f8f9fa; }
+.mentor-table .action-btns { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; }
+.mentor-table .action-btns .btn-sm { padding: 4px 10px; font-size: 0.75rem; }
+
+.detail-row td {
+  background: #f8f9fa;
+  padding: 16px;
+  text-align: left;
+}
+.detail-question { margin-bottom: 16px; }
+.detail-question .question-title { font-size: 0.85rem; }
+.detail-answer { margin: 8px 0; font-size: 0.82rem; }
+.detail-answer strong { color: var(--text); }
+.detail-answer .correct-tag { color: var(--success); font-weight: 600; }
+.detail-answer .wrong-tag { color: var(--danger); font-weight: 600; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal h2 { color: var(--primary); margin-bottom: 16px; }
+.modal-info {
+  background: var(--primary-light);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+.modal-info p { margin-bottom: 4px; }
+
+.modal-section { margin-bottom: 20px; }
+.modal-section h3 { font-size: 0.92rem; margin-bottom: 8px; }
+.modal-section .hint { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 8px; }
+
+.modal-input {
+  width: 100px;
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: var(--transition);
+}
+.modal-input:focus { border-color: var(--primary); outline: none; }
+.modal-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: var(--transition);
+}
+.modal-textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(26,115,232,0.15); }
+
+.adjust-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.adjust-item:last-child { border-bottom: none; }
+.adjust-item label { flex: 1; font-size: 0.82rem; }
+
+.confirm-modal { max-width: 400px; text-align: center; }
+.confirm-modal p { margin-bottom: 20px; font-size: 0.95rem; }
+
+/* QR */
+.qr-section { text-align: center; padding: 16px; }
+.qr-section canvas, .qr-section img { margin: 0 auto; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  z-index: 2000;
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+@keyframes slideDown {
+  from { opacity:0; transform:translateX(-50%) translateY(-10px); }
+  to { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Empty state */
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+.empty-state p { font-size: 0.9rem; }
+
+/* Hidden utility */
+.hidden { display: none !important; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.25rem; }
+  .nav-tabs .tab { font-size: 0.78rem; padding: 10px 8px; }
+  .product-tabs .ptab { font-size: 0.78rem; padding: 12px 8px; }
+  .card { padding: 14px; }
+  .question-title { font-size: 0.85rem; }
+  .option label { font-size: 0.82rem; }
+  .modal { padding: 16px; }
+  .score-breakdown { gap: 8px; }
+  .score-item { min-width: 80px; padding: 8px; }
+  .score-item .value { font-size: 1.1rem; }
+  .record-item { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .record-score { text-align: left; }
+}
+
+/* Question bank management */
+.qb-list { list-style: none; padding: 0; margin: 0 0 8px 0; }
+.qb-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 6px 8px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.qb-item:hover { background: var(--primary-light); }
+.qb-item code { font-size: 0.75rem; background: var(--bg); padding: 2px 4px; border-radius: 3px; }
+.qb-item .btn-sm { padding: 2px 8px; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>嗨动产品新人培训答题</h1>
+    <p>HiDynamic Products Training Quiz</p>
+  </div>
+
+  <!-- Navigation Tabs (3 main tabs) -->
+  <div class="nav-tabs" id="navTabs">
+    <div class="tab active" data-tab="quiz" onclick="switchTab('quiz')">📝 答题</div>
+    <div class="tab" data-tab="records" onclick="switchTab('records')">📋 答题记录</div>
+    <div class="tab" data-tab="mentor" onclick="switchTab('mentor')">🔒 导师管理</div>
+  </div>
+
+  <!-- Quiz Tab -->
+  <div id="quizTab"></div>
+
+  <!-- Records Tab -->
+  <div id="recordsTab" class="hidden"></div>
+
+  <!-- Mentor Tab -->
+  <div id="mentorTab" class="hidden"></div>
+
+  <!-- QR Code -->
+  <div class="card qr-section" id="qrCard">
+    <h2>扫码分享</h2>
+    <div id="qrcode"></div>
+    <p style="font-size:0.8rem;color:var(--text-secondary);margin-top:8px">扫描二维码在手机上打开</p>
+  </div>
+</div>
+
+<!-- Modal container -->
+<div id="modalContainer"></div>
+
+<script>
+// ============ QUESTION POOLS (loaded from server) ============
+let PRODUCTS = {};  // Loaded from server async
+// ============ CONSTANTS ============
+const API_BASE = '';  // 相对路径：自动适配当前域名（Render / CloudBase / 本地均可）
+const USER_KEY = 'hidynamic_current_user';
+const MENTOR_PASSWORD = 'lwf7758258';
+const QUIZ_CONFIG = { singleCount:10, multiCount:4, judgeCount:2, shortCount:2 };
+const SCORE = { single:5, multi:5, judge:5, short:10 };
+const PASS_SCORE = 80;
+const MIN_REPLACE = 3;
+
+// ============ STATE ============
+let state = {
+  activeTab: 'quiz',           // 'quiz' | 'records' | 'mentor'
+  // Quiz tab
+  nameStep: true,              // true = showing name input
+  userName: '',                // current user name
+  currentProduct: null,
+  currentQuestions: null,
+  answers: {},
+  submitted: false,
+  mode: 'idle',                // 'idle' | 'quiz' | 'result' (within quiz tab after name step)
+  score: null,
+  lastRecordId: null,
+  // Mentor tab
+  mentorAuthed: false,
+  mentorDetailId: null,       // expanded record in mentor panel
+  // Server sync
+  dataLoaded: false,
+  loadingError: null,
+};
+
+// ============ IN-MEMORY CACHE (synced with server) ============
+let cachedRecords = [];
+let cachedTracking = {};
+let cachedQuestions = {};
+
+// ============ API STORAGE (server-side, cross-device sync) ============
+// Sync read from cache (instant, synchronous for rendering)
+function loadRecords() { return cachedRecords; }
+function loadTracking() { return cachedTracking; }
+
+// Async: fetch all data from server
+async function fetchAllData() {
+  try {
+    const [recordsRes, trackingRes, questionsRes] = await Promise.all([
+      fetch(API_BASE + '/api/records'),
+      fetch(API_BASE + '/api/tracking'),
+      fetch(API_BASE + '/api/questions')
+    ]);
+    if (!recordsRes.ok || !trackingRes.ok || !questionsRes.ok) throw new Error('Server response error');
+    cachedRecords = await recordsRes.json();
+    cachedTracking = await trackingRes.json();
+    cachedQuestions = await questionsRes.json();
+    PRODUCTS = cachedQuestions;  // sync to global
+    state.dataLoaded = true;
+    state.loadingError = null;
+  } catch (e) {
+    state.loadingError = '无法连接服务器，请检查网络后刷新页面';
+    console.error('Failed to fetch data:', e);
+  }
+}
+
+// Async: save entire records array to server (bulk update)
+async function saveRecordsToServer(records) {
+  cachedRecords = records;
+  try {
+    // For bulk save, we update each modified record individually
+    // Actually, we just re-fetch after any change to ensure consistency
+    await fetchAllData();
+  } catch (e) {
+    toast('数据同步失败，请刷新页面');
+  }
+}
+
+// Async: add a single record to server
+async function addRecord(record) {
+  cachedRecords.push(record);
+  try {
+    const res = await fetch(API_BASE + '/api/records', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    });
+    if (!res.ok) throw new Error('Save failed');
+    // Re-fetch to ensure consistency (server may have other updates)
+    await fetchAllData();
+  } catch (e) {
+    toast('提交失败，请检查网络连接');
+  }
+}
+
+// Async: update a record on server (mentor scoring)
+async function updateRecordOnServer(recordId, updates) {
+  const idx = cachedRecords.findIndex(r => r.id === recordId);
+  if (idx >= 0) Object.assign(cachedRecords[idx], updates);
+  try {
+    const res = await fetch(API_BASE + '/api/records/' + recordId, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updates)
+    });
+    if (!res.ok) throw new Error('Update failed');
+    await fetchAllData();
+  } catch (e) {
+    toast('评分保存失败，请检查网络');
+  }
+}
+
+// Async: delete a record on server
+async function deleteRecordOnServer(recordId) {
+  cachedRecords = cachedRecords.filter(r => r.id !== recordId);
+  try {
+    const res = await fetch(API_BASE + '/api/records/' + recordId, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Delete failed');
+    await fetchAllData();
+  } catch (e) {
+    toast('删除失败，请检查网络');
+  }
+}
+
+// Tracking: get for specific user+product (from cache, sync)
+function getTracking(pid) {
+  const key = `${state.userName}_${pid}`;
+  if (!cachedTracking[key]) {
+    cachedTracking[key] = { seenIds: [], lastSeenIds: [] };
+  }
+  return cachedTracking[key];
+}
+
+// Async: update tracking on server
+async function updateTracking(pid, fn) {
+  const key = `${state.userName}_${pid}`;
+  const data = cachedTracking[key] || { seenIds: [], lastSeenIds: [] };
+  fn(data);
+  cachedTracking[key] = data;
+  try {
+    await fetch(API_BASE + '/api/tracking/' + pid, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: state.userName, seenIds: data.seenIds, lastSeenIds: data.lastSeenIds })
+    });
+  } catch (e) {
+    console.error('Tracking save failed:', e);
+  }
+}
+// User name: stays in localStorage (device-local convenience)
+function loadUser() {
+  try { return localStorage.getItem(USER_KEY) || ''; } catch(e) { return ''; }
+}
+function saveUser(name) {
+  try { localStorage.setItem(USER_KEY, name); } catch(e) {}
+}
+
+// Async: reset tracking for a product
+async function resetTracking(pid) {
+  const key = `${state.userName}_${pid}`;
+  cachedTracking[key] = { seenIds: [], lastSeenIds: [] };
+  try {
+    await fetch(API_BASE + '/api/tracking/' + pid + '/reset', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: state.userName })
+    });
+    toast('题库已重置');
+  } catch (e) {
+    toast('重置失败，请检查网络');
+  }
+}
+
+// ============ UTILS ============
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i=a.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function toast(msg) {
+  const el = document.createElement('div');
+  el.className = 'toast'; el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); }, 2000);
+}
+
+async function retryConnect() {
+  state.loadingError = null;
+  renderQuizTab();
+  await fetchAllData();
+  renderQuizTab();
+}
+
+function getQuestionById(qid) {
+  for (const pid in PRODUCTS) {
+    const pool = PRODUCTS[pid].pool;
+    for (const type in pool) {
+      const found = pool[type].find(q => q.id === qid);
+      if (found) return { ...found, type, productId: pid };
+    }
+  }
+  return null;
+}
+
+// Get question from record snapshot (preferred) or fall back to live question bank
+function getQuestionForRecord(record, qid) {
+  const snap = record.questionsSnapshot;
+  if (snap) {
+    for (const type of ['single','multi','judge','short']) {
+      if (snap[type] && snap[type][qid]) {
+        return { ...snap[type][qid], type, id: qid, fromSnapshot: true };
+      }
+    }
+  }
+  // Fallback: look up in live question bank
+  const live = getQuestionById(qid);
+  if (live) return { ...live, fromSnapshot: false };
+  return null;
+}
+
+function getQuestionSnapshot(qs) {
+  const snap = { single:{}, multi:{}, judge:{}, short:{} };
+  for (const type of ['single','multi','judge','short']) {
+    qs[type].forEach(q => {
+      snap[type][q.id] = { q: q.q, ans: q.ans, opts: q.opts, ref: q.ref };
+    });
+  }
+  return snap;
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function formatDateFull(iso) {
+  const d = new Date(iso);
+  return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function getEffectiveTotalScore(record) {
+  let total = record.objectiveScore;
+  if (record.scoreAdjustments) {
+    Object.values(record.scoreAdjustments).forEach(adj => { total += (adj || 0); });
+  }
+  if (record.mentorScore !== null && record.mentorScore !== undefined) {
+    total += record.mentorScore;
+  }
+  return total;
+}
+
+// ============ QUIZ GENERATION ============
+function generateQuiz(pid) {
+  const pool = PRODUCTS[pid].pool;
+  const tracking = getTracking(pid);
+  const seenSet = new Set(tracking.seenIds);
+  const lastSeen = tracking.lastSeenIds ? new Set(tracking.lastSeenIds) : null;
+
+  function pick(type, count) {
+    const items = pool[type];
+    const unseen = items.filter(q => !seenSet.has(q.id));
+    const seen = items.filter(q => seenSet.has(q.id));
+
+    let picked;
+    if (unseen.length >= count) {
+      picked = shuffle(unseen).slice(0, count);
+    } else {
+      const need = count - unseen.length;
+      picked = [...shuffle(unseen), ...shuffle(seen).slice(0, need)];
+    }
+
+    // For re-take: ensure at least MIN_REPLACE new questions vs lastSeen
+    if (lastSeen && lastSeen.size > 0) {
+      const allItems = shuffle([...items]);
+      const candidates = allItems.filter(q => !lastSeen.has(q.id));
+      const oldQs = allItems.filter(q => lastSeen.has(q.id));
+
+      let newPicked = [...candidates.slice(0, count)];
+      if (newPicked.length < count) {
+        newPicked = [...newPicked, ...shuffle(oldQs).slice(0, count - newPicked.length)];
+      }
+      const newCount = newPicked.filter(q => !lastSeen.has(q.id)).length;
+      if (newCount < MIN_REPLACE && oldQs.length >= count) {
+        const forced = shuffle(candidates).slice(0, Math.min(MIN_REPLACE, candidates.length));
+        const remaining = shuffle(oldQs.filter(q => !forced.some(f=>f.id===q.id))).slice(0, count-forced.length);
+        let attempt = [...forced, ...remaining];
+        if (attempt.length < count) {
+          const rest = shuffle(allItems.filter(q => !attempt.some(a=>a.id===q.id)));
+          attempt = [...attempt, ...rest.slice(0, count-attempt.length)];
+        }
+        newPicked = shuffle(attempt.slice(0, count));
+      }
+      picked = newPicked;
+    }
+    return picked;
+  }
+
+  const quiz = {
+    product: pid,
+    single: pick('single', QUIZ_CONFIG.singleCount),
+    multi: pick('multi', QUIZ_CONFIG.multiCount),
+    judge: pick('judge', QUIZ_CONFIG.judgeCount),
+    short: pick('short', QUIZ_CONFIG.shortCount),
+    timestamp: Date.now()
+  };
+
+  // Note: Tracking update moved to submitQuiz() so it's saved to server with the record
+  return quiz;
+}
+
+// ============ SCORING (objective only) ============
+function calculateScore(questions, answers) {
+  let singleScore = 0, multiScore = 0, judgeScore = 0;
+  let singleTotal = 0, multiTotal = 0, judgeTotal = 0;
+
+  questions.single.forEach(q => {
+    singleTotal += SCORE.single;
+    if (answers[q.id] !== undefined && answers[q.id] === q.ans) singleScore += SCORE.single;
+  });
+  questions.multi.forEach(q => {
+    multiTotal += SCORE.multi;
+    const userAns = answers[q.id] || [];
+    if (userAns.length === 0) return;
+    const correctSet = new Set(q.ans);
+    const userSet = new Set(userAns);
+    const allCorrect = q.ans.length === userAns.length && q.ans.every(a=>userSet.has(a));
+    if (allCorrect) {
+      multiScore += SCORE.multi;
+    } else {
+      const hasWrong = userAns.some(a => !correctSet.has(a));
+      if (!hasWrong && userAns.some(a => correctSet.has(a))) {
+        multiScore += Math.floor(SCORE.multi / 2);
+      }
+    }
+  });
+  questions.judge.forEach(q => {
+    judgeTotal += SCORE.judge;
+    if (answers[q.id] === q.ans) judgeScore += SCORE.judge;
+  });
+
+  const objectiveScore = singleScore + multiScore + judgeScore;
+  const objectiveTotal = singleTotal + multiTotal + judgeTotal;
+
+  return {
+    singleScore, singleTotal,
+    multiScore, multiTotal,
+    judgeScore, judgeTotal,
+    objectiveScore, objectiveTotal,
+    mentorMax: SCORE.short * QUIZ_CONFIG.shortCount,
+    totalMax: objectiveTotal + SCORE.short * QUIZ_CONFIG.shortCount
+  };
+}
+
+// ============ TAB NAVIGATION ============
+function switchTab(tab) {
+  state.activeTab = tab;
+  // Update nav tab styles
+  document.querySelectorAll('#navTabs .tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  // Show/hide tab content
+  document.getElementById('quizTab').classList.toggle('hidden', tab !== 'quiz');
+  document.getElementById('recordsTab').classList.toggle('hidden', tab !== 'records');
+  document.getElementById('mentorTab').classList.toggle('hidden', tab !== 'mentor');
+  // Render active tab
+  if (tab === 'quiz') renderQuizTab();
+  else if (tab === 'records') renderRecordsTab();
+  else if (tab === 'mentor') renderMentorTab();
+  // Show/hide QR card (only on quiz tab idle mode)
+  const qrCard = document.getElementById('qrCard');
+  qrCard.classList.toggle('hidden', tab !== 'quiz');
+}
+
+// ============ NAME STEP ============
+function confirmName() {
+  const input = document.getElementById('nameInput');
+  const name = (input.value || '').trim();
+  if (!name) { toast('请输入姓名'); input.focus(); return; }
+  state.userName = name;
+  saveUser(name);
+  state.nameStep = false;
+  state.mode = 'idle';
+  renderQuizTab();
+}
+
+function editName() {
+  state.nameStep = true;
+  renderQuizTab();
+}
+
+// ============ QUIZ FLOW ============
+function selectProduct(pid) {
+  state.currentProduct = pid;
+  state.submitted = false;
+  state.answers = {};
+  state.currentQuestions = generateQuiz(pid);
+  state.mode = 'quiz';
+  renderQuizTab();
+}
+
+function answerQuestion(qid, value, isMulti) {
+  if (state.submitted) return;
+  if (isMulti) {
+    if (!state.answers[qid]) state.answers[qid] = [];
+    const idx = state.answers[qid].indexOf(value);
+    if (idx >= 0) {
+      state.answers[qid].splice(idx, 1);
+    } else {
+      state.answers[qid].push(value);
+    }
+    // Only update this specific option's visual state, NOT full re-render
+    // This prevents race condition where rapid clicks hit destroyed DOM
+    const div = document.querySelector(`.question-block .option[data-qid="${qid}"][data-oi="${value}"]`);
+    if (div) {
+      const isSelected = state.answers[qid].includes(value);
+      if (isSelected) div.classList.add('selected');
+      else div.classList.remove('selected');
+      const cb = div.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = isSelected;
+    }
+    console.log('[Multi]', qid, 'clicked', value, '→', state.answers[qid]);
+  } else {
+    state.answers[qid] = value;
+    renderQuestionArea();
+  }
+}
+
+async function submitQuiz() {
+  if (state.mode !== 'quiz') return;
+  const qs = state.currentQuestions;
+  const required = [...qs.single, ...qs.multi, ...qs.judge].filter(q => {
+    if (Array.isArray(q.ans)) return (state.answers[q.id]||[]).length > 0;
+    return state.answers[q.id] !== undefined;
+  });
+  const totalObj = qs.single.length + qs.multi.length + qs.judge.length;
+  if (required.length < totalObj) {
+    toast(`请完成所有客观题（已答${required.length}/${totalObj}题）`);
+    return;
+  }
+  state.submitted = true;
+  const score = calculateScore(qs, state.answers);
+  state.score = score;
+
+  // Create record and save to server
+  const qSnapshot = getQuestionSnapshot(qs);
+  const record = {
+    id: 'record_' + Date.now() + '_' + Math.floor(Math.random()*1000),
+    name: state.userName,
+    product: state.currentProduct,
+    date: new Date().toISOString(),
+    questionIds: {
+      single: qs.single.map(q => q.id),
+      multi: qs.multi.map(q => q.id),
+      judge: qs.judge.map(q => q.id),
+      short: qs.short.map(q => q.id)
+    },
+    questionsSnapshot: qSnapshot,
+    answers: { ...state.answers },
+    objectiveScore: score.objectiveScore,
+    objectiveTotal: score.objectiveTotal,
+    mentorScore: null,
+    totalScore: score.objectiveScore,
+    passed: false,
+    mentorReviewed: false,
+    mentorComment: '',
+    scoreAdjustments: {}
+  };
+
+  // Save tracking (async, but don't block UI)
+  const allIds = [...qs.single, ...qs.multi, ...qs.judge, ...qs.short].map(q=>q.id);
+  updateTracking(state.currentProduct, d => {
+    allIds.forEach(id => d.seenIds.push(id));
+    d.seenIds = [...new Set(d.seenIds)];
+    d.lastSeenIds = allIds;
+  });
+
+  // Save record to server (async)
+  await addRecord(record);
+
+  state.lastRecordId = record.id;
+  state.mode = 'result';
+  renderQuizTab();
+  toast('答题已提交，简答题待导师评分');
+}
+
+function retakeQuiz() {
+  state.submitted = false;
+  state.answers = {};
+  state.currentQuestions = generateQuiz(state.currentProduct);
+  state.mode = 'quiz';
+  renderQuizTab();
+}
+
+// resetTracking is now async and defined in STORAGE section above
+
+function goToRecords() {
+  switchTab('records');
+}
+
+// ============ RENDER: QUIZ TAB ============
+function renderQuizTab() {
+  const container = document.getElementById('quizTab');
+  if (state.nameStep) {
+    container.innerHTML = renderNameStep();
+    return;
+  }
+  if (state.mode === 'quiz' && state.currentQuestions) {
+    container.innerHTML = `<div class="card">${renderQuestionArea()}</div>`;
+  } else if (state.mode === 'result') {
+    container.innerHTML = renderResult();
+  } else {
+    container.innerHTML = renderProductSelection();
+  }
+}
+
+function renderNameStep() {
+  const storedName = state.userName || loadUser();
+  // Show loading state if data hasn been fetched yet
+  if (!state.dataLoaded && state.loadingError === null) {
+    return `
+      <div class="card name-card">
+        <h2>欢迎参加嗨动产品培训答题</h2>
+        <p class="subtitle">正在连接服务器...</p>
+        <p style="color:var(--text-secondary);font-size:0.85rem">数据同步中，请稍候</p>
+      </div>`;
+  }
+  // Show error if server connection failed
+  if (state.loadingError) {
+    return `
+      <div class="card name-card">
+        <h2>⚠️ 连接失败</h2>
+        <p class="subtitle" style="color:var(--danger)">${state.loadingError}</p>
+        <button class="btn btn-primary" onclick="retryConnect()">重新连接</button>
+      </div>`;
+  }
+  return `
+    <div class="card name-card">
+      <h2>欢迎参加嗨动产品培训答题</h2>
+      <p class="subtitle">请输入你的姓名后开始答题</p>
+      ${storedName ? `<p class="current-user">当前用户：${storedName}（可修改）</p>` : ''}
+      <input type="text" class="name-input" id="nameInput" placeholder="请输入你的姓名" value="${storedName}" maxlength="20" onkeydown="if(event.key==='Enter')confirmName()">
+      <button class="btn btn-primary" onclick="confirmName()">确认并开始</button>
+      <p style="font-size:0.78rem;color:var(--success);margin-top:12px">✅ 服务器已连接，数据实时同步</p>
+    </div>`;
+}
+
+function renderProductSelection() {
+  const productTabs = Object.entries(PRODUCTS).map(([pid, p]) =>
+    `<div class="ptab" onclick="selectProduct('${pid}')">${p.icon} ${p.name}</div>`
+  ).join('');
+
+  return `
+    <div class="product-tabs">${productTabs}</div>
+    <div class="card">
+      <h2>选择产品开始答题</h2>
+      <p style="color:var(--text-secondary)">每个产品从题库中随机抽取18题（10单选+4多选+2判断+2简答），80分合格。</p>
+      <div class="info-bar" style="margin-top:12px">
+        <span class="info-tag">单选 10×5=50分</span>
+        <span class="info-tag">多选 4×5=20分</span>
+        <span class="info-tag">判断 2×5=10分</span>
+        <span class="info-tag">简答 2×10=20分</span>
+      </div>
+      <p style="color:var(--text-secondary);font-size:0.85rem">客观题满分80分 + 简答题20分(导师评分) = 总分100分 | 合格线≥80分</p>
+      <p style="color:var(--text-secondary);font-size:0.85rem;margin-top:8px">重考自动替换3-4道新题，保证每次答题新鲜感</p>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+        <span style="font-size:0.82rem;color:var(--text-secondary)">当前答题人：</span>
+        <span style="font-size:0.82rem;font-weight:600;color:var(--primary)">${state.userName}</span>
+        <button class="btn btn-outline btn-sm" style="margin-left:8px" onclick="editName()">修改</button>
+      </div>
+    </div>`;
+}
+
+function renderQuestionArea() {
+  const qs = state.currentQuestions;
+  if (!qs) return '';
+
+  const objIds = [...qs.single, ...qs.multi, ...qs.judge].map(q => q.id);
+  const progress = objIds.length;
+  const answered = objIds.filter(id => {
+    const v = state.answers[id];
+    if (v === undefined) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    return true;
+  }).length;
+
+  let html = '';
+
+  // Progress
+  html += `<div class="progress-bar"><div class="progress-fill" style="width:${(answered/progress)*100}%"></div></div>`;
+  html += `<p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px">答题进度：${answered}/${progress} 客观题</p>`;
+  html += `<p style="font-size:0.82rem;color:var(--primary);margin-bottom:16px">答题人：${state.userName} | 产品：${PRODUCTS[qs.product].name}</p>`;
+
+  // Single choice
+  html += '<h3 style="color:var(--success)">📝 单选题（每题5分）</h3>';
+  qs.single.forEach((q, qi) => { html += renderSingleQuestion(q, qi); });
+
+  // Multi choice
+  html += '<h3 style="color:#E65100">☑️ 多选题（每题5分，少选得2.5分，错选0分）</h3>';
+  qs.multi.forEach((q, qi) => { html += renderMultiQuestion(q, qi); });
+
+  // Judge
+  html += '<h3 style="color:#1565C0">⚖️ 判断题（每题5分）</h3>';
+  qs.judge.forEach((q, qi) => { html += renderJudgeQuestion(q, qi); });
+
+  // Short answer
+  html += '<h3 style="color:#7B1FA2">✍️ 简答题（每题10分，需导师评分）</h3>';
+  qs.short.forEach((q, qi) => { html += renderShortQuestion(q, qi); });
+
+  // Submit button
+  html += `<div class="btn-group"><button class="btn btn-primary" onclick="submitQuiz()">提交答案</button></div>`;
+
+  return html;
+}
+
+function renderSingleQuestion(q, qi) {
+  const selected = state.answers[q.id];
+  const showResult = state.submitted;
+  const letters = ['A','B','C','D'];
+  let html = `<div class="question-block"><div class="question-title"><span class="q-type single">单选</span>${qi+1}. ${q.q}</div>`;
+  q.opts.forEach((opt, oi) => {
+    let cls = 'option';
+    if (showResult || selected === oi) cls += ' selected';
+    const checked = selected === oi;
+    html += `<div class="${cls}" onclick="answerQuestion('${q.id}',${oi},false)">
+      <input type="radio" name="${q.id}" value="${oi}" ${checked?'checked':''} ${showResult?'disabled':''}>
+      <label>${letters[oi]}. ${opt}</label>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderMultiQuestion(q, qi) {
+  const selected = state.answers[q.id] || [];
+  const showResult = state.submitted;
+  const letters = ['A','B','C','D','E','F'];
+  let html = `<div class="question-block"><div class="question-title"><span class="q-type multi">多选</span>${qi+1}. ${q.q}</div>`;
+  q.opts.forEach((opt, oi) => {
+    let cls = 'option';
+    if (showResult || selected.includes(oi)) cls += ' selected';
+    const checked = selected.includes(oi);
+    html += `<div class="${cls}" data-qid="${q.id}" data-oi="${oi}" onclick="answerQuestion('${q.id}',${oi},true)">
+      <input type="checkbox" ${checked?'checked':''} ${showResult?'disabled':''}>
+      <label>${letters[oi]}. ${opt}</label>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderJudgeQuestion(q, qi) {
+  const selected = state.answers[q.id];
+  const showResult = state.submitted;
+  let html = `<div class="question-block"><div class="question-title"><span class="q-type judge">判断</span>${qi+1}. ${q.q}</div>`;
+  ['正确','错误'].forEach((opt, oi) => {
+    const val = oi === 0;
+    let cls = 'option';
+    if (showResult || selected === val) cls += ' selected';
+    const checked = selected === val;
+    html += `<div class="${cls}" onclick="answerQuestion('${q.id}',${val},false)">
+      <input type="radio" name="${q.id}" ${checked?'checked':''} ${showResult?'disabled':''}>
+      <label>${opt}</label>
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderShortQuestion(q, qi) {
+  const showResult = state.submitted;
+  const answer = state.answers[q.id] || '';
+  let html = `<div class="question-block"><div class="question-title"><span class="q-type short">简答</span>${qi+1}. ${q.q}</div>`;
+  if (showResult) {
+    html += `<p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:8px"><strong>你的回答：</strong>${answer || '(未作答)'}</p>`;
+    html += `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">简答题将由导师人工评分，评分后可在「答题记录」中查看最终成绩。</p>`;
+  } else {
+    html += `<textarea class="short-answer-input" placeholder="请输入你的回答..." onchange="answerQuestion('${q.id}',this.value,false)">${answer}</textarea>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderResult() {
+  const qs = state.currentQuestions;
+  const score = state.score;
+  let html = '';
+
+  // Result card
+  html += '<div class="card">';
+  html += '<h2>答题结果</h2>';
+
+  // Score circle (objective only, pending mentor review)
+  html += `<div class="score-display">`;
+  html += `<div class="score-circle score-pending">${score.objectiveScore}</div>`;
+  html += `<p style="font-size:1.1rem;font-weight:700;color:var(--primary)">客观题得分</p>`;
+  html += `<p style="font-size:0.85rem;color:var(--text-secondary)">满分${score.objectiveTotal}分 | 合格线${PASS_SCORE}分（含导师评分）</p></div>`;
+
+  // Score breakdown
+  html += '<div class="score-breakdown">';
+  html += `<div class="score-item"><div class="label">单选题</div><div class="value">${score.singleScore}/${score.singleTotal}</div></div>`;
+  html += `<div class="score-item"><div class="label">多选题</div><div class="value">${score.multiScore}/${score.multiTotal}</div></div>`;
+  html += `<div class="score-item"><div class="label">判断题</div><div class="value">${score.judgeScore}/${score.judgeTotal}</div></div>`;
+  html += `<div class="score-item"><div class="label">客观题</div><div class="value">${score.objectiveScore}/${score.objectiveTotal}</div></div>`;
+  html += '</div>';
+
+  // Mentor review notice
+  html += `<div class="mentor-section">`;
+  html += '<h3>⚠️ 简答题需导师评分</h3>';
+  html += `<p style="font-size:0.85rem;color:var(--text-secondary)">简答题（20分）需导师在「导师管理」中评分，评分后总分和合格状态将自动更新。</p>`;
+  html += `<p style="font-size:0.82rem;color:var(--text-secondary);margin-top:4px">请联系导师在「导师管理」中进行评分</p>`;
+  html += '</div>';
+
+  // Buttons
+  html += '<div class="btn-group">';
+  html += `<button class="btn btn-primary" onclick="retakeQuiz()">🔄 重新考试</button>`;
+  html += `<button class="btn btn-outline" onclick="goToRecords()">📋 查看答题记录</button>`;
+  html += `</div>`;
+
+  html += '</div>';
+
+  // Answer details
+  html += '<div class="card"><h2>答题详情</h2>';
+  qs.single.forEach((q,i) => { html += renderSingleQuestion(q,i); });
+  qs.multi.forEach((q,i) => { html += renderMultiQuestion(q,i); });
+  qs.judge.forEach((q,i) => { html += renderJudgeQuestion(q,i); });
+  qs.short.forEach((q,i) => { html += renderShortQuestion(q,i); });
+  html += '</div>';
+
+  return html;
+}
+
+// ============ RENDER: RECORDS TAB ============
+function renderRecordsTab() {
+  const container = document.getElementById('recordsTab');
+  const records = loadRecords();
+
+  if (records.length === 0) {
+    container.innerHTML = `<div class="card"><div class="empty-state"><p>暂无答题记录</p><p style="font-size:0.82rem;margin-top:8px">完成答题后，记录将在此显示</p></div></div>`;
+    return;
+  }
+
+  // Group by product
+  const byProduct = {};
+  records.forEach(r => {
+    if (!byProduct[r.product]) byProduct[r.product] = [];
+    byProduct[r.product].push(r);
+  });
+
+  let html = '<div class="card"><h2>答题记录</h2>';
+
+  Object.entries(PRODUCTS).forEach(([pid, p]) => {
+    if (!byProduct[pid] || byProduct[pid].length === 0) return;
+
+    // Group by name within product
+    const byName = {};
+    byProduct[pid].forEach(r => {
+      if (!byName[r.name]) byName[r.name] = [];
+      byName[r.name].push(r);
+    });
+
+    html += `<div class="record-group">`;
+    html += `<div class="record-group-header">${p.icon} ${p.name}</div>`;
+
+    Object.entries(byName).forEach(([name, nameRecords]) => {
+      // Find max total score for best marking
+      const maxScore = Math.max(...nameRecords.map(r => getEffectiveTotalScore(r)));
+
+      // Sort: best score first, then by date desc
+      const sorted = nameRecords.sort((a, b) => {
+        const aScore = getEffectiveTotalScore(a);
+        const bScore = getEffectiveTotalScore(b);
+        if (bScore !== aScore) return bScore - aScore;
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      sorted.forEach(r => {
+        const isBest = getEffectiveTotalScore(r) === maxScore;
+        const reviewed = r.mentorReviewed;
+        const totalScore = getEffectiveTotalScore(r);
+
+        html += `<div class="record-item ${isBest ? 'best' : ''}">`;
+        html += `<div class="record-info">`;
+        html += `<span class="record-name">${isBest ? '🏆 ' : ''}${r.name}</span>`;
+        html += `<span class="record-date">${formatDate(r.date)} | 客观${r.objectiveScore}/${r.objectiveTotal || 80}</span>`;
+        html += `</div>`;
+        html += `<div class="record-score">`;
+        if (reviewed) {
+          html += `<span class="${totalScore >= PASS_SCORE ? 'pass' : 'fail'}">${totalScore}分</span>`;
+          html += `<span class="record-status ${totalScore >= PASS_SCORE ? 'pass' : 'fail'}">${totalScore >= PASS_SCORE ? '✅合格' : '❌未合格'}</span>`;
+        } else {
+          html += `<span class="pending">待导师评分</span>`;
+          html += `<span class="record-status pending">客观${r.objectiveScore}分</span>`;
+        }
+        html += `</div>`;
+        html += `</div>`;
+      });
+    });
+
+    html += `</div>`;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ============ RENDER: MENTOR TAB ============
+function renderMentorTab() {
+  const container = document.getElementById('mentorTab');
+
+  if (!state.mentorAuthed) {
+    container.innerHTML = `
+      <div class="card mentor-login">
+        <h2>🔒 导师管理</h2>
+        <p>请输入导师密码以进入管理面板</p>
+        <input type="password" class="password-input" id="mentorPasswordInput" placeholder="请输入密码" onkeydown="if(event.key==='Enter')checkMentorPassword()">
+        <button class="btn btn-primary" onclick="checkMentorPassword()">进入</button>
+      </div>`;
+    return;
+  }
+
+  const records = loadRecords();
+  let html = `<div class="card">`;
+  html += `<div class="mentor-header">`;
+  html += `<h2 style="margin-bottom:0">导师管理面板</h2>`;
+  html += `<button class="btn btn-outline btn-sm" onclick="mentorLogout()">退出</button>`;
+  html += `</div>`;
+
+  if (records.length === 0) {
+    html += `<div class="empty-state"><p>暂无答题记录</p></div>`;
+  } else {
+    // Sort by date desc
+    const sorted = records.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    html += `<div class="mentor-table-wrapper">`;
+    html += `<table class="mentor-table">`;
+    html += `<thead><tr>`;
+    html += `<th>姓名</th><th>产品</th><th>日期</th><th>客观分</th><th>导师分</th><th>总分</th><th>合格</th><th>操作</th>`;
+    html += `</tr></thead><tbody>`;
+
+    sorted.forEach(r => {
+      const totalScore = getEffectiveTotalScore(r);
+      const reviewed = r.mentorReviewed;
+      const pName = PRODUCTS[r.product] ? PRODUCTS[r.product].name : r.product;
+
+      html += `<tr>`;
+      html += `<td>${r.name}</td>`;
+      html += `<td>${pName}</td>`;
+      html += `<td style="white-space:nowrap">${formatDate(r.date)}</td>`;
+      html += `<td>${r.objectiveScore}/${r.objectiveTotal || 80}</td>`;
+      html += `<td>${reviewed ? r.mentorScore : '<span style="color:var(--warning)">待评</span>'}</td>`;
+      html += `<td>${reviewed ? totalScore : '<span style="color:var(--warning)">待评</span>'}</td>`;
+      html += `<td>${reviewed ? (totalScore >= PASS_SCORE ? '✅' : '❌') : '⏳'}</td>`;
+      html += `<td><div class="action-btns">`;
+      html += `<button class="btn btn-outline btn-sm" onclick="toggleMentorDetail('${r.id}')">详情</button>`;
+      html += `<button class="btn btn-primary btn-sm" onclick="openMentorScoreModal('${r.id}')">评分</button>`;
+      html += `<button class="btn btn-danger btn-sm" onclick="confirmDeleteRecord('${r.id}')">删除</button>`;
+      html += `</div></td>`;
+      html += `</tr>`;
+
+      // Detail expansion row
+      if (state.mentorDetailId === r.id) {
+        html += `<tr class="detail-row"><td colspan="8">${renderRecordDetail(r)}</td></tr>`;
+      }
+    });
+
+    html += `</tbody></table></div>`;
+  }
+
+  html += `</div>`;
+  // Question bank management
+  html += renderQuestionBankSection();
+  container.innerHTML = html;
+}
+
+// ============ QUESTION BANK MANAGEMENT ============
+let qbState = { product: 'lcd', mode: 'list', editQid: null, addType: 'single' };
+
+function renderQuestionBankSection() {
+  const qState = qbState;
+  const prod = PRODUCTS[qState.product];
+  if (!prod) return '<div class="card"><p>题库未加载</p></div>';
+
+  const typeNames = { single: '单选题', multi: '多选题', judge: '判断题', short: '简答题' };
+  let html = '<div class="card" style="margin-top:16px">';
+  html += '<div class="mentor-header"><h3>📝 题库维护</h3></div>';
+
+  // Product selector
+  html += '<div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">';
+  Object.entries(PRODUCTS).forEach(([k,v]) => {
+    html += '<button class="btn '+(k===qState.product?'btn-primary':'btn-outline')+' btn-sm" onclick="qbSwitchProduct(\''+k+'\')">'+v.name+'</button>';
+  });
+  html += '</div>';
+
+  if (qState.mode === 'list') {
+    let totalQ = 0;
+    for (const type of ['single','multi','judge','short']) {
+      const pool = prod.pool[type];
+      totalQ += pool.length;
+      html += '<div style="margin-bottom:8px"><strong>'+typeNames[type]+' ('+pool.length+'题)</strong></div>';
+      html += '<ul class="qb-list">';
+      pool.forEach(q => {
+        const preview = (q.q || '').length > 40 ? q.q.substring(0,40)+'...' : q.q;
+        html += '<li class="qb-item">';
+        html += '<span title="'+escapeHtml(q.q)+'"><code>'+q.id+'</code> '+escapeHtml(preview)+'</span>';
+        html += '<div style="display:flex;gap:4px">';
+        html += '<button class="btn btn-outline btn-sm" onclick="qbEditQuestion(\''+qState.product+'\',\''+q.id+'\')">编辑</button>';
+        html += '<button class="btn btn-danger btn-sm" onclick="qbDeleteQuestion(\''+qState.product+'\',\''+q.id+'\')">删除</button>';
+        html += '</div></li>';
+      });
+      html += '</ul>';
+    }
+    html += '<div style="margin-top:12px;display:flex;gap:8px;align-items:center">';
+    html += '<select id="qbAddType" style="padding:6px 8px;border-radius:6px;border:1px solid var(--border)">';
+    Object.entries(typeNames).forEach(([k,v]) => html += '<option value="'+k+'">添加'+v+'</option>');
+    html += '</select>';
+    html += '<button class="btn btn-primary btn-sm" onclick="qbStartAdd()">+ 添加题目</button>';
+    html += '<span style="font-size:0.8rem;color:var(--text-secondary)">共 '+totalQ+' 题</span>';
+    html += '</div>';
+  } else {
+    html += renderQuestionEditor();
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderQuestionEditor() {
+  const qState = qbState;
+  const prod = PRODUCTS[qState.product];
+  let q = null;
+  const typeNames = { single: '单选题', multi: '多选题', judge: '判断题', short: '简答题' };
+
+  if (qState.mode === 'edit') {
+    for (const t of ['single','multi','judge','short']) {
+      const found = prod.pool[t].find(qx => qx.id === qState.editQid);
+      if (found) { q = found; break; }
+    }
+    if (!q) return '<p>题目未找到</p>';
+  } else {
+    const addType = document.getElementById('qbAddType')?.value || 'single';
+    qState.addType = addType;
+    q = { id: addType.substring(0,1)+'_new_'+Date.now(), q: '', opts: addType==='judge' ? [] : (addType==='short' ? [] : ['','','','']), ans: addType==='multi' ? [] : (addType==='judge' ? false : 0), ref: '' };
+  }
+
+  const isEdit = qState.mode === 'edit';
+  const type = isEdit ? (Array.isArray(q.ans) ? 'multi' : (typeof q.ans === 'boolean' ? 'judge' : (q.ref !== undefined ? 'short' : 'single'))) : qState.addType;
+
+  let html = '<button class="btn btn-outline btn-sm" onclick="qbState.mode=\'list\';renderMentorTab()">← 返回题库列表</button>';
+  html += '<h4 style="margin:8px 0">'+(isEdit?'编辑':'新增')+typeNames[type]+'</h4>';
+
+  html += '<div style="margin-bottom:8px"><label style="font-weight:600;font-size:0.85rem">题目ID</label>';
+  html += '<input id="qbQid" value="'+escapeHtml(q.id)+'" '+(isEdit?'readonly':'')+' style="width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border);font-family:monospace;font-size:0.85rem"></div>';
+
+  html += '<div style="margin-bottom:8px"><label style="font-weight:600;font-size:0.85rem">题目</label>';
+  html += '<textarea id="qbQ" style="width:100%;padding:8px;border-radius:6px;border:1px solid var(--border);min-height:60px;font-size:0.9rem;resize:vertical">'+escapeHtml(q.q || '')+'</textarea></div>';
+
+  if (type === 'single' || type === 'multi') {
+    html += '<div style="margin-bottom:8px"><label style="font-weight:600;font-size:0.85rem">选项('+(type==='multi'?'多选':'单选')+')</label>';
+    const opts = q.opts || [];
+    for (let i = 0; i < Math.max(opts.length, 4); i++) {
+      html += '<div style="display:flex;gap:4px;margin:4px 0;align-items:center">';
+      html += '<span style="font-size:0.8rem;width:20px">'+String.fromCharCode(65+i)+'.</span>';
+      html += '<input class="qb-opt" data-idx="'+i+'" value="'+escapeHtml(opts[i]||'')+'" style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border);font-size:0.85rem" placeholder="选项'+(i+1)+'">';
+      html += '</div>';
+    }
+    html += '<label style="font-weight:600;font-size:0.85rem;margin-top:8px">正确答案</label>';
+    if (type === 'single') {
+      html += '<select id="qbAns" style="width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border);font-size:0.85rem">';
+      for (let i = 0; i < 4; i++) {
+        html += '<option value="'+i+'" '+(q.ans===i?'selected':'')+'>'+String.fromCharCode(65+i)+'</option>';
+      }
+      html += '</select>';
+    } else {
+      html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">';
+      for (let i = 0; i < 4; i++) {
+        html += '<label style="font-size:0.85rem"><input type="checkbox" class="qb-multi-ans" value="'+i+'" '+((q.ans||[]).includes(i)?'checked':'')+'> '+String.fromCharCode(65+i)+'</label>';
+      }
+      html += '</div>';
+    }
+  }
+
+  if (type === 'judge') {
+    html += '<div style="margin-bottom:8px"><label style="font-weight:600;font-size:0.85rem">答案</label>';
+    html += '<select id="qbAns" style="width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border);font-size:0.85rem">';
+    html += '<option value="true" '+(q.ans===true?'selected':'')+'>正确 (True)</option>';
+    html += '<option value="false" '+(q.ans===false?'selected':'')+'>错误 (False)</option>';
+    html += '</select></div>';
+  }
+
+  if (type === 'short') {
+    html += '<div style="margin-bottom:8px"><label style="font-weight:600;font-size:0.85rem">参考答案/评分要点</label>';
+    html += '<textarea id="qbRef" style="width:100%;padding:8px;border-radius:6px;border:1px solid var(--border);min-height:80px;font-size:0.85rem;resize:vertical">'+escapeHtml(q.ref || '')+'</textarea></div>';
+  }
+
+  html += '<div style="display:flex;gap:8px;margin-top:12px">';
+  html += '<button class="btn btn-primary" onclick="qbSaveQuestion(\''+qState.product+'\')">保存</button>';
+  html += '<button class="btn btn-outline" onclick="qbState.mode=\'list\';renderMentorTab()">取消</button>';
+  html += '</div>';
+  return html;
+}
+
+async function qbSaveQuestion(product) {
+  const type = qbState.mode === 'edit' ? null : qbState.addType;
+  const qid = document.getElementById('qbQid').value.trim();
+  const qText = document.getElementById('qbQ').value.trim();
+  if (!qid || !qText) { toast('题目ID和题目内容不能为空'); return; }
+
+  let actualType = type || '';
+  if (qbState.mode === 'edit') {
+    for (const t of ['single','multi','judge','short']) {
+      if (PRODUCTS[product].pool[t].find(qx => qx.id === qbState.editQid)) { actualType = t; break; }
+    }
+  }
+
+  let question = { id: qid, q: qText };
+  if (actualType === 'single') {
+    const opts = []; for (let i=0;i<4;i++) opts.push(document.querySelector('.qb-opt[data-idx=\"'+i+'\"]')?.value || '');
+    question.opts = opts;
+    question.ans = parseInt(document.getElementById('qbAns').value);
+  } else if (actualType === 'multi') {
+    const opts = []; for (let i=0;i<4;i++) opts.push(document.querySelector('.qb-opt[data-idx=\"'+i+'\"]')?.value || '');
+    question.opts = opts;
+    const ansArr = [];
+    document.querySelectorAll('.qb-multi-ans:checked').forEach(cb => ansArr.push(parseInt(cb.value)));
+    question.ans = ansArr;
+  } else if (actualType === 'judge') {
+    question.ans = document.getElementById('qbAns').value === 'true';
+  } else if (actualType === 'short') {
+    question.ref = document.getElementById('qbRef')?.value || '';
+  }
+
+  try {
+    if (qbState.mode === 'edit') {
+      await fetch(API_BASE + '/api/questions/' + product + '/' + qbState.editQid, {
+        method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(question)
+      });
+      for (const t of ['single','multi','judge','short']) {
+        const idx = PRODUCTS[product].pool[t].findIndex(qx => qx.id === qbState.editQid);
+        if (idx >= 0) { PRODUCTS[product].pool[t][idx] = Object.assign({}, PRODUCTS[product].pool[t][idx], question); break; }
+      }
+    } else {
+      await fetch(API_BASE + '/api/questions/' + product, {
+        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ type: actualType, question })
+      });
+      PRODUCTS[product].pool[actualType].push(question);
+    }
+    qbState.mode = 'list';
+    renderMentorTab();
+    toast('题目已保存');
+  } catch(e) { toast('保存失败'); }
+}
+
+function qbSwitchProduct(pid) { qbState.product = pid; qbState.mode = 'list'; renderMentorTab(); }
+function qbEditQuestion(pid, qid) { qbState.product = pid; qbState.editQid = qid; qbState.mode = 'edit'; renderMentorTab(); }
+function qbStartAdd() { qbState.addType = document.getElementById('qbAddType')?.value || 'single'; qbState.mode = 'add'; renderMentorTab(); }
+
+async function qbDeleteQuestion(pid, qid) {
+  if (!confirm('确定删除题目 ' + qid + '？此操作不可撤销！')) return;
+  try {
+    await fetch(API_BASE + '/api/questions/' + pid + '/' + qid, { method: 'DELETE' });
+    for (const type of ['single','multi','judge','short']) {
+      PRODUCTS[pid].pool[type] = PRODUCTS[pid].pool[type].filter(q => q.id !== qid);
+    }
+    renderMentorTab();
+    toast('题目已删除');
+  } catch(e) { toast('删除失败'); }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return (''+str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function checkMentorPassword() {
+  const input = document.getElementById('mentorPasswordInput');
+  if (!input) return;
+  if (input.value === MENTOR_PASSWORD) {
+    state.mentorAuthed = true;
+    renderMentorTab();
+    toast('导师验证成功');
+  } else {
+    toast('密码错误');
+    input.value = '';
+    input.focus();
+  }
+}
+
+function mentorLogout() {
+  state.mentorAuthed = false;
+  state.mentorDetailId = null;
+  renderMentorTab();
+}
+
+function toggleMentorDetail(recordId) {
+  state.mentorDetailId = (state.mentorDetailId === recordId) ? null : recordId;
+  renderMentorTab();
+}
+
+// Render record detail (all questions with answers)
+function renderRecordDetail(record) {
+  const types = [
+    { key: 'single', label: '单选题', type: 'single' },
+    { key: 'multi', label: '多选题', type: 'multi' },
+    { key: 'judge', label: '判断题', type: 'judge' },
+    { key: 'short', label: '简答题', type: 'short' }
+  ];
+
+  let html = '';
+
+  // Show mentor comment if exists
+  if (record.mentorComment) {
+    html += `<div style="background:#FFF8E1;border:1px solid #FFE082;border-radius:8px;padding:12px;margin-bottom:16px">`;
+    html += `<strong style="color:#F57F17">导师评语：</strong>`;
+    html += `<p style="margin-top:4px;font-size:0.85rem">${record.mentorComment}</p>`;
+    html += `</div>`;
+  }
+
+  types.forEach(({ key, label }) => {
+    const ids = record.questionIds[key] || [];
+    if (ids.length === 0) return;
+
+    html += `<h4 style="margin-bottom:8px;color:var(--primary)">${label}</h4>`;
+    ids.forEach((qid, qi) => {
+      const q = getQuestionForRecord(record, qid);
+      if (!q) {
+        html += `<div class="detail-question"><p style="color:var(--danger)">题目 ${qid} 已不存在</p></div>`;
+        return;
+      }
+      html += renderQuestionDetail(q, qi, record);
+    });
+  });
+
+  return html;
+}
+
+function renderQuestionDetail(q, qi, record) {
+  const letters = ['A','B','C','D','E','F'];
+  const userAnswer = record.answers[q.id];
+  const adjustment = record.scoreAdjustments && record.scoreAdjustments[q.id];
+
+  let html = `<div class="detail-question">`;
+  html += `<div class="question-title"><span class="q-type ${q.type}">${getTypeLabel(q.type)}</span>${qi+1}. ${q.q}</div>`;
+
+  if (q.type === 'single') {
+    q.opts.forEach((opt, oi) => {
+      let cls = 'option';
+      if (oi === q.ans) cls += ' correct';
+      else if (userAnswer === oi) cls += ' wrong';
+      const checked = userAnswer === oi;
+      html += `<div class="${cls}" style="cursor:default"><input type="radio" disabled ${checked?'checked':''}><label>${letters[oi]}. ${opt}</label></div>`;
+    });
+    const correct = userAnswer === q.ans;
+    html += `<p class="detail-answer">得分：${correct ? SCORE.single : 0}/${SCORE.single} ${correct ? '<span class="correct-tag">✓正确</span>' : '<span class="wrong-tag">✗错误</span>'}</p>`;
+  } else if (q.type === 'multi') {
+    const userArr = userAnswer || [];
+    q.opts.forEach((opt, oi) => {
+      let cls = 'option';
+      if (q.ans.includes(oi)) cls += ' correct';
+      else if (userArr.includes(oi)) cls += ' wrong';
+      const checked = userArr.includes(oi);
+      html += `<div class="${cls}" style="cursor:default"><input type="checkbox" disabled ${checked?'checked':''}><label>${letters[oi]}. ${opt}</label></div>`;
+    });
+    const correctSet = new Set(q.ans);
+    const userSet = new Set(userArr);
+    const allCorrect = q.ans.length === userArr.length && q.ans.every(a=>userSet.has(a));
+    const hasWrong = userArr.some(a => !correctSet.has(a));
+    const partial = !hasWrong && userArr.some(a => correctSet.has(a)) && !allCorrect;
+    const score = allCorrect ? SCORE.multi : (partial ? Math.floor(SCORE.multi/2) : 0);
+    html += `<p class="detail-answer">得分：${score}/${SCORE.multi} ${allCorrect ? '<span class="correct-tag">✓全对</span>' : partial ? '<span class="wrong-tag">△少选</span>' : '<span class="wrong-tag">✗错误</span>'}</p>`;
+  } else if (q.type === 'judge') {
+    ['正确','错误'].forEach((opt, oi) => {
+      const val = oi === 0;
+      let cls = 'option';
+      if (val === q.ans) cls += ' correct';
+      else if (userAnswer === val) cls += ' wrong';
+      const checked = userAnswer === val;
+      html += `<div class="${cls}" style="cursor:default"><input type="radio" disabled ${checked?'checked':''}><label>${opt}</label></div>`;
+    });
+    const correct = userAnswer === q.ans;
+    html += `<p class="detail-answer">得分：${correct ? SCORE.judge : 0}/${SCORE.judge} ${correct ? '<span class="correct-tag">✓正确</span>' : '<span class="wrong-tag">✗错误</span>'}</p>`;
+  } else if (q.type === 'short') {
+    html += `<p class="detail-answer"><strong>学生回答：</strong></p>`;
+    html += `<p style="padding:10px;background:#f5f5f5;border-radius:6px;margin-bottom:8px;font-size:0.85rem">${userAnswer || '(未作答)'}</p>`;
+    html += `<details><summary style="cursor:pointer;color:var(--primary);font-size:0.82rem;font-weight:600">查看参考答案</summary>`;
+    html += `<p style="padding:10px;background:#f5f5f5;border-radius:6px;margin-top:8px;font-size:0.82rem">${q.ref}</p></details>`;
+    if (record.mentorReviewed && record.mentorScore !== null) {
+      html += `<p class="detail-answer">导师评分：${record.mentorScore}/${SCORE.short * QUIZ_CONFIG.shortCount}</p>`;
+    }
+  }
+
+  // Show adjustment if exists
+  if (adjustment && adjustment !== 0) {
+    html += `<p class="detail-answer" style="color:var(--warning)">⚠️ 导师调整：${adjustment > 0 ? '+' : ''}${adjustment}分</p>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function getTypeLabel(type) {
+  const labels = { single: '单选', multi: '多选', judge: '判断', short: '简答' };
+  return labels[type] || type;
+}
+
+// ============ MENTOR: SCORE MODAL ============
+function openMentorScoreModal(recordId) {
+  const records = loadRecords();
+  const record = records.find(r => r.id === recordId);
+  if (!record) { toast('记录不存在'); return; }
+
+  const pName = PRODUCTS[record.product] ? PRODUCTS[record.product].name : record.product;
+  const currentMentorScore = record.mentorScore !== null ? record.mentorScore : 0;
+  const currentComment = record.mentorComment || '';
+
+  // Build short answer display
+  let shortAnswerHtml = '';
+  const shortIds = record.questionIds.short || [];
+  shortIds.forEach(qid => {
+    const q = getQuestionForRecord(record, qid);
+    if (!q) return;
+    const userAnswer = record.answers[qid] || '';
+    shortAnswerHtml += `<div style="margin-bottom:12px">`;
+    shortAnswerHtml += `<p style="font-weight:600;font-size:0.85rem;margin-bottom:4px">${q.q}</p>`;
+    shortAnswerHtml += `<p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:4px"><strong>学生回答：</strong></p>`;
+    shortAnswerHtml += `<p style="padding:10px;background:#f5f5f5;border-radius:6px;font-size:0.82rem;margin-bottom:8px">${userAnswer || '(未作答)'}</p>`;
+    shortAnswerHtml += `<details><summary style="cursor:pointer;color:var(--primary);font-size:0.8rem">查看参考答案</summary>`;
+    shortAnswerHtml += `<p style="padding:8px;background:#f5f5f5;border-radius:6px;margin-top:4px;font-size:0.8rem">${q.ref}</p></details>`;
+    shortAnswerHtml += `</div>`;
+  });
+
+  // Build score adjustment inputs for objective questions
+  let adjustHtml = '';
+  const objTypes = [
+    { key: 'single', label: '单选' },
+    { key: 'multi', label: '多选' },
+    { key: 'judge', label: '判断' }
+  ];
+  objTypes.forEach(({ key, label }) => {
+    const ids = record.questionIds[key] || [];
+    ids.forEach(qid => {
+      const q = getQuestionForRecord(record, qid);
+      if (!q) return;
+      const currentAdj = (record.scoreAdjustments && record.scoreAdjustments[qid]) || 0;
+      // Truncate question text for display
+      const qText = q.q.length > 30 ? q.q.substring(0, 30) + '...' : q.q;
+      adjustHtml += `<div class="adjust-item">`;
+      adjustHtml += `<label><span class="q-type ${key}" style="font-size:0.65rem">${label}</span>${qid}: ${qText}</label>`;
+      adjustHtml += `<input type="number" class="modal-input adjust-input" data-qid="${qid}" placeholder="0" value="${currentAdj}" style="width:80px">`;
+      adjustHtml += `</div>`;
+    });
+  });
+
+  const modalHtml = `
+    <div class="modal-overlay" onclick="closeMentorScoreModal(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <h2>导师评分</h2>
+        <div class="modal-info">
+          <p><strong>答题人：</strong>${record.name}</p>
+          <p><strong>产品：</strong>${pName}</p>
+          <p><strong>日期：</strong>${formatDateFull(record.date)}</p>
+          <p><strong>客观题得分：</strong>${record.objectiveScore}/${record.objectiveTotal || 80}</p>
+        </div>
+
+        <div class="modal-section">
+          <h3>简答题作答</h3>
+          ${shortAnswerHtml || '<p style="color:var(--text-secondary)">无简答题</p>'}
+          <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
+            <label style="font-size:0.88rem;font-weight:600">简答题评分：</label>
+            <input type="number" class="modal-input" id="mentorScoreInput" min="0" max="${SCORE.short * QUIZ_CONFIG.shortCount}" value="${currentMentorScore}" style="width:80px">
+            <span style="font-size:0.85rem;color:var(--text-secondary)">/ ${SCORE.short * QUIZ_CONFIG.shortCount}分</span>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>导师评语</h3>
+          <textarea class="modal-textarea" id="mentorCommentInput" placeholder="请输入评语（可选）...">${currentComment}</textarea>
+        </div>
+
+        <div class="modal-section">
+          <h3>特殊分数调整（可选）</h3>
+          <p class="hint">对有歧义的选择题/判断题可手动调整得分，正数加分负数减分</p>
+          ${adjustHtml || '<p style="color:var(--text-secondary)">无客观题</p>'}
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="saveMentorScore('${recordId}')">保存评分</button>
+          <button class="btn btn-outline" onclick="closeMentorScoreModal()">取消</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('modalContainer').innerHTML = modalHtml;
+  // Scroll modal to top
+  const modal = document.querySelector('.modal');
+  if (modal) modal.scrollTop = 0;
+}
+
+function closeMentorScoreModal(event) {
+  // If no event (called from cancel button), close directly
+  if (!event) { document.getElementById('modalContainer').innerHTML = ''; return; }
+  // Only close if clicking the overlay
+  if (!event.target.classList.contains('modal-overlay')) return;
+  document.getElementById('modalContainer').innerHTML = '';
+}
+
+async function saveMentorScore(recordId) {
+  try {
+    const records = loadRecords();
+    const record = records.find(r => r.id === recordId);
+    if (!record) { toast('记录不存在'); return; }
+
+    // Get mentor score
+    const scoreInput = document.getElementById('mentorScoreInput');
+    if (!scoreInput) { toast('评分输入框未找到，请刷新页面重试'); return; }
+    let mentorScore = parseInt(scoreInput.value);
+    if (isNaN(mentorScore)) mentorScore = 0;
+    mentorScore = Math.max(0, Math.min(SCORE.short * QUIZ_CONFIG.shortCount, mentorScore));
+
+    // Get comment
+    const commentInput = document.getElementById('mentorCommentInput');
+    const comment = commentInput ? commentInput.value : '';
+
+    // Get adjustments
+    const adjustments = {};
+    document.querySelectorAll('.adjust-input').forEach(input => {
+      const qid = input.dataset.qid;
+      const val = parseInt(input.value);
+      if (!isNaN(val) && val !== 0) {
+        adjustments[qid] = val;
+      }
+    });
+
+    // Calculate total
+    let totalScore = record.objectiveScore;
+    Object.values(adjustments).forEach(adj => { totalScore += adj; });
+    totalScore += mentorScore;
+
+    // Save to server (async)
+    await updateRecordOnServer(recordId, {
+      mentorScore, mentorComment: comment, scoreAdjustments: adjustments, totalScore, passed: totalScore >= PASS_SCORE, mentorReviewed: true
+    });
+
+    // Close modal
+    document.getElementById('modalContainer').innerHTML = '';
+
+    // Re-render
+    renderMentorTab();
+    toast('评分已保存');
+  } catch (e) {
+    console.error('saveMentorScore error:', e);
+    toast('保存失败：' + (e.message || '未知错误'));
+  }
+}
+
+// ============ MENTOR: DELETE RECORD ============
+function confirmDeleteRecord(recordId) {
+  const records = loadRecords();
+  const record = records.find(r => r.id === recordId);
+  if (!record) { toast('记录不存在'); return; }
+
+  const pName = PRODUCTS[record.product] ? PRODUCTS[record.product].name : record.product;
+
+  const modalHtml = `
+    <div class="modal-overlay" onclick="closeConfirmModal(event)">
+      <div class="modal confirm-modal" onclick="event.stopPropagation()">
+        <h2 style="color:var(--danger)">⚠️ 确认删除</h2>
+        <p>确定要删除以下答题记录吗？此操作不可恢复：</p>
+        <div style="background:#f8f9fa;border-radius:8px;padding:12px;margin:12px 0;text-align:left;font-size:0.85rem">
+          <p><strong>姓名：</strong>${record.name}</p>
+          <p><strong>产品：</strong>${pName}</p>
+          <p><strong>日期：</strong>${formatDateFull(record.date)}</p>
+          <p><strong>客观分：</strong>${record.objectiveScore}分</p>
+        </div>
+        <div class="btn-group" style="justify-content:center">
+          <button class="btn btn-danger" onclick="deleteRecord('${recordId}')">确认删除</button>
+          <button class="btn btn-outline" onclick="closeConfirmModal()">取消</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('modalContainer').innerHTML = modalHtml;
+}
+
+function closeConfirmModal(event) {
+  if (event && event.target && !event.target.classList.contains('modal-overlay')) return;
+  document.getElementById('modalContainer').innerHTML = '';
+}
+
+async function deleteRecord(recordId) {
+  await deleteRecordOnServer(recordId);
+
+  // Close modal
+  document.getElementById('modalContainer').innerHTML = '';
+
+  // Clear detail if it was this record
+  if (state.mentorDetailId === recordId) state.mentorDetailId = null;
+
+  // Re-render
+  renderMentorTab();
+  toast('记录已删除');
+}
+
+// ============ QR CODE ============
+function renderQR() {
+  const qrDiv = document.getElementById('qrcode');
+  if (!qrDiv) return;
+  qrDiv.innerHTML = '';
+  if (typeof QRCode === 'undefined') {
+    qrDiv.innerHTML = '<p style="color:var(--text-secondary)">QR码库未加载</p>';
+    return;
+  }
+  try {
+    new QRCode(qrDiv, {
+      text: window.location.href,
+      width: 150,
+      height: 150,
+      colorDark: '#1A73E8',
+      colorLight: '#FFFFFF'
+    });
+  } catch(e) {
+    qrDiv.innerHTML = '<p style="color:var(--text-secondary)">QR码生成失败</p>';
+  }
+}
+
+// ============ INIT (async: load data from server first) ============
+async function init() {
+  // Load stored user name from localStorage (device-local)
+  state.userName = loadUser();
+
+  // Show loading state
+  renderQuizTab();
+
+  // Fetch data from server (cross-device sync)
+  await fetchAllData();
+
+  // Re-render with loaded data
+  renderQuizTab();
+  renderQR();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
