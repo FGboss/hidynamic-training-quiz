@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+
+# 运行时生成的数据（持久化在 Postgres，不进仓库）
+data/quiz-data.json
+data/quiz-data.json.bak
+data/subscriptions.json
+
+# 旧 CloudBase Docker 部署（已弃用）
+Dockerfile
